@@ -29,9 +29,23 @@ app.get("/", (req, res) => {
   res.send("Welcome to the home page!");
 });
 
-app.get("/index", async (req, res) => {
+app.get("/trails", async (req, res) => {
   const trails = await Trail.find();
   res.render("trails", { trails });
+});
+
+app.get("/trails/new", (req, res) => {
+  res.render("new");
+});
+
+app.post("/trails", async (req, res) => {
+  const { title, description } = req.body.trail;
+  console.log(title);
+  console.log(description);
+
+  const trail = new Trail({ title, description });
+  await trail.save();
+  res.redirect("/trails");
 });
 
 async function addTrailTest() {
