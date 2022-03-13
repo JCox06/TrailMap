@@ -3,7 +3,7 @@ const app = express();
 const mongoose = require("mongoose");
 const Trail = require("./models/trail");
 const path = require("path");
-
+const ejsMate = require("ejs-mate"); 
 mongoose.connect("mongodb://127.0.0.1:27017/trailmap", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -15,6 +15,7 @@ db.once("open", () => {
 });
 
 
+app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
@@ -37,6 +38,7 @@ app.get("/trails", async (req, res) => {
 app.get("/trails/new", (req, res) => {
   res.render("new");
 });
+
 
 app.post("/trails", async (req, res) => {
   const { title, description } = req.body.trail;

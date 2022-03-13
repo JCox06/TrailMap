@@ -1,26 +1,12 @@
-<!DOCTYPE html>
-<html lang="en">
+<% layout("layouts/default") %>
 
-<head>
-  <meta charset="UTF-8">
-  <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>All Trails</title>
-</head>
+    <h1>All Trails</h1>
+    <a href="/trails/new">Add new trail</a>
 
-<body>
-
-  <h1>All Trails</h1>
-  <a href="/trails/new">Add new trail</a>
-
-  <ul>
-    <% for(let t of trails) { %>
-      <li>
-        <%= t.title %>
-      </li>
-      <% } %>
-  </ul>
-
-</body>
-
-</html>
+    <ul>
+      <% for(let t of trails) { %>
+        <li>
+          <%= t.title %>
+        </li>
+        <% } %>
+    </ul>
