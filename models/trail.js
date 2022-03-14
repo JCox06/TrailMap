@@ -12,6 +12,13 @@ const TrailSchema = new mongoose.Schema({
       source: String,
       description: String
     }
+  ],
+
+  comments: [
+    {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "Comment"
+    }
   ]
 });
 

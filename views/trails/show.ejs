@@ -1,25 +1,31 @@
 <% layout("layouts/default") %>
 
+
   <h1>
-    <%= trail.title %>
+    <%= trail.title%>
   </h1>
+
 
   <div class="row mt-3">
 
     <div class="col-6">
+
+
       <div class="card">
+        <div class="card-header">About</div>
         <div class="card-body">
-          <h4 class="card-title">Description</h4>
-          <p class="card-text">
-            <%= trail.description %>
-          </p>
+          <p class="card-text">Trail suggested by: </p>
+          <p class="card-text">Total user ratings: </p>
+          <p class="card-text">Average user score: </p>
 
         </div>
-
-        <div class="card-footer text-muted">
-          Difficulty Rating: <%= trail.difficulty%>
+        <div class="card-footer">
+          <small class="text-muted">Last updated on the </small>
+          <br>
+          <small class="text-muted">First posted on the </small>
         </div>
       </div>
+
     </div>
     <div class="col-6">
       <div class="carousel slide" data-bs-ride="carousel" id="carousel-1">
@@ -39,4 +45,69 @@
       </div>
     </div>
 
+  </div>
+
+  <div class="row mt-5">
+    <div class="col-12">
+      <h2 class="">Description</h2>
+      <p class="lead">
+        <%= trail.description %>
+      </p>
+    </div>
+  </div>
+
+  <div class="row mt-5">
+    <h3>User ratings</h3>
+    <div class="col-6">
+
+      <p>To ensure your review is helpful ensure it meets the following criteria:</p>
+      <ul>
+        <li>What's good about the trail</li>
+        <li>What is not good</li>
+        <li>Who would you recommend this to?</li>
+      </ul>
+
+      <form action="/trails/<%= trail._id %>/comment " method="POST">
+        <div class="form-group">
+          <label for="rating" class="form-label">Trail Rating</label>
+          <input type="number" class="form-control" id="rating" name="comment[rating]">
+        </div>
+        <div class="form-group">
+          <label for="text" class="form-label">What did you think of the trail?</label>
+          <textarea class="form-control" type="text" id="text" name="comment[text]"></textarea>
+        </div>
+
+        <button class="btn btn-success mt-3">Submit Review</button>
+      </form>
+    </div>
+
+    <div class="col-6">
+
+      <h4 class="mb-3">Ratings and comments from the community</h4>
+
+      <% if(trail.comments.length==0) { %>
+        <div class="alert alert-primary" role="alert">
+          It looks like noone has left a review for this trail yet. Why don't you be the first!
+        </div>
+        <% } else { %>
+          <% for(let c of trail.comments) { %>
+            <div class="card mb-3">
+              <div class="card-header">
+                <%= c.rating %> rating by abcdefg
+              </div>
+              <div class="card-body">
+
+                <p card="card-text">
+                  <%= c.text %>
+                </p>
+
+              </div>
+              <div class="card-footer">
+                <small class="text-muted">Posted on the </small>
+              </div>
+            </div>
+            <% } %>
+              <% } %>
+
+    </div>
   </div>
