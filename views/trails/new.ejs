@@ -1,0 +1,42 @@
+<% layout("layouts/default") %>
+
+  <form class="" action="/trails" method="POST">
+
+    <div class="form-group">
+      <label for="title" class="form-label">Trail Title</label>
+      <input type="text" class="form-control" id="title" name="trail[title]">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="description">Description</label>
+      <textarea class="form-control" type="text" id="description" name="trail[description]"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="ipreview1">Image Preview One</label>
+      <input type="text" class="form-control" id="ipreview1" name="trail[ipreview1]">
+    </div>
+
+    <div class="form-group">
+      <label class="form-label" for="ipreview2">Image Preview Two</label>
+      <input type="text" class="form-control" id="ipreview2" name="trail[preview2]">
+    </div>
+
+
+    <div class="form-group">
+      <label class="form-label" for="difficulty">Difficulty</label>
+
+      <select class="custom-select m-3" id="difficulty" name="trail[difficulty]">
+        <option selected value="easy">Easy</option>
+        <option value="moderate">Moderate</option>
+        <option value="difficult">Challenging/Difficult</option>
+        <option value="hard">Hard</option>
+
+      </select>
+
+
+      <div>
+        <button class="btn btn-success mt-3">Add new trail</button>
+      </div>
+
+  </form>

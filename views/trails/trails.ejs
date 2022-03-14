@@ -1,0 +1,30 @@
+<% layout("layouts/default") %>
+
+  <h1>All Trails</h1>
+
+
+  <% for(let t of trails) { %>
+    <div class="card d-inline-flex m-3 TRAIL-card">
+      <div class="d-flex flex-column">
+        <div class="card-body">
+          <h5 class="card-title">
+            <%= t.title %>
+          </h5>
+        </div>
+        <div class="card-body">
+          <p class="card-text">
+            <%= t.description %>
+          </p>
+          <a class="btn btn-primary mb-3" href="/trails/<%=t._id%>">
+            View Trail
+          </a>
+
+          <div class="card-footer text-muted">
+            Difficulty Rating: <%= t.difficulty%>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+    <%} %>

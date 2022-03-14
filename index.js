@@ -20,6 +20,7 @@ app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
 app.use(express.urlencoded({ extended: true }));
+app.use(express.static(path.join(__dirname, "public")));
 
 
 app.listen(8000, () => {
@@ -32,27 +33,24 @@ app.get("/", (req, res) => {
 
 app.get("/trails", async (req, res) => {
   const trails = await Trail.find();
-  res.render("trails", { trails });
+  res.render("trails/trails", { trails });
 });
 
 app.get("/trails/new", (req, res) => {
-  res.render("new");
+  res.render("trails/new");
 });
 
+app.get("/trails/:Tid", async (req, res) => {
+  const { Tid } = req.params;
+  const trail = await Trail.findById(Tid);
+  res.render("trails/show", { trail });
+});
 
 app.post("/trails", async (req, res) => {
-  const { title, description } = req.body.trail;
-  console.log(title);
-  console.log(description);
+  console.log(req.body.trail);
+  const { title, description, difficulty} = req.body.trail;
 
-  const trail = new Trail({ title, description });
+  const trail = new Trail({ title, description, difficulty});
   await trail.save();
   res.redirect("/trails");
 });
-
-async function addTrailTest() {
-  const trail = new Trail({title: "This is the title", description: "This is the description"});
-  console.log(trail);
-  await trail.save();
-  console.log("Added trail to the databse");
-}
