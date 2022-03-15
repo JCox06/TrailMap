@@ -31,7 +31,7 @@ function addStep() {
   element.id = `step${numberOfSteps}`;
   element.innerHTML = `
   <label for="stepDescription${numberOfSteps}">Step ${numberOfSteps}</label>
-  <textarea class="form-control" type="text" id="stepDescription${numberOfSteps}" required></textarea>
+  <textarea class="form-control" type="text" id="stepDescription${numberOfSteps}" name="trail[step][${numberOfSteps - 1}]" required></textarea>
   <div class="valid-feedback">
       Looks good!
     </div>
@@ -91,6 +91,8 @@ function removeStep(event) {
       elementToChange.firstElementChild.textContent = `Step ${i}`;
       elementToChange.firstElementChild.setAttribute("for", `stepDescription${i}`);
       elementToChange.firstElementChild.nextElementSibling.id = `stepDescription${i}`;
+      elementToChange.firstElementChild.nextElementSibling.setAttribute("name", `trail[step][${i - 1}]`);
+      
       elementToChange.firstElementChild.nextElementSibling.nextElementSibling.id = `rstep${i}`;
     }
   }

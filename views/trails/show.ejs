@@ -56,6 +56,30 @@
     </div>
   </div>
 
+
+  <div class="mt-3 mb-3">
+    <h3>How to find</h3>
+    <% if(trail.steps.length==0) { %>
+      <div class="alert alert-warning alert-dismissible fade show" role="alert">
+        <p>It looks like this trail does not have any steps on how to get there!</p>
+      </div>
+      <% } else {%>
+
+        <% for(let i=0; i < trail.steps.length; i++) {%>
+          <div class="card mb-2 border-primary">
+            <div class="card-body">
+              <h4 class="card-title">Step <%= i + 1 %>
+              </h4>
+              <p class="card-text">
+                <%= trail.steps[i].text %>
+              </p>
+            </div>
+
+          </div>
+          <% } %>
+            <% } %>
+  </div>
+
   <div class="row mt-5">
     <h3>User ratings</h3>
     <div class="col-6">

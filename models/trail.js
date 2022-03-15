@@ -14,6 +14,12 @@ const TrailSchema = new mongoose.Schema({
     }
   ],
 
+  steps: [
+    {
+      text: String
+    }
+  ],
+
   comments: [
     {
       type: mongoose.Schema.Types.ObjectId,

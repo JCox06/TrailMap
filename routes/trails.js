@@ -19,10 +19,18 @@ router.get("/:Tid", async (req, res) => {
 });
 
 router.post("/", async (req, res) => {
-  console.log(req.body.trail);
   const { title, description, difficulty} = req.body.trail;
   
+  const steps = req.body.trail.step;
+  
   const trail = new Trail({ title, description, difficulty });
+  
+  for (let s of steps) {
+    trail.steps.push({
+      text: s
+    });
+  }
+
   await trail.save();
   res.redirect("/trails");
 });
