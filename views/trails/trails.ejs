@@ -13,14 +13,18 @@
         </div>
         <div class="card-body">
           <p class="card-text">
-            <%= t.description %>
+            <% if(t.description.length> 235) { %>
+              <%= t.description.substring(0, 235) %>.....
+                <% } else {%>
+                  <%= t.description %>
+                    <% } %>
           </p>
           <a class="btn btn-primary mb-3" href="/trails/<%=t._id%>">
             View Trail
           </a>
         </div>
         <div class="card-footer text-muted">
-          Difficulty Rating: <%= t.difficulty%>
+          <%= t.difficulty%>
         </div>
       </div>
 

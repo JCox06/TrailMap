@@ -1,0 +1,15 @@
+@keyframes animate {
+  from {
+    opacity: 0.0
+  }
+
+  to {
+    opacity: 1.0
+  }
+
+}
+
+.step {
+  animation: animate;
+  animation-duration: 0.3s;
+}
