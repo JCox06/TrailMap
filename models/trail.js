@@ -16,6 +16,7 @@ const TrailSchema = new mongoose.Schema({
 
   steps: [
     {
+      _id: {id: false},
       text: String
     }
   ],

@@ -1,7 +1,7 @@
 const express = require("express");
 const app = express();
 const mongoose = require("mongoose");
-const Trail = require("./models/trail");
+const methodOverride = require("method-override");
 const path = require("path");
 const ejsMate = require("ejs-mate"); 
 const trailRouter = require("./routes/trails");
@@ -20,8 +20,10 @@ app.engine("ejs", ejsMate);
 app.set("view engine", "ejs");
 app.set("views", path.join(__dirname, "views"));
 
+//MiddleWare
 app.use(express.urlencoded({ extended: true }));
 app.use(express.static(path.join(__dirname, "public")));
+app.use(methodOverride("_method"));
 
 //Routers
 app.use("/trails", trailRouter);

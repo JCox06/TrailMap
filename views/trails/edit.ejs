@@ -1,12 +1,14 @@
 <% layout("layouts/default") %>
 
-  <h1 class="mb-4">Create New Trail</h1>
+  <h1 class="mb-4">Edit <%= trail.title %>
+  </h1>
 
-  <form class="nv" action="/trails" method="POST" novalidate>
+  <form class="nv" action="/trails/<%= trail._id %>?_method=PUT" method="POST" novalidate>
 
     <div class="form-group">
       <label for="title" class="form-label">Trail Title</label>
-      <input type="text" class="form-control" id="title" name="trail[title]" required>
+      <input type="text" class="form-control" id="title" name="trail[title]" value="<%=trail.title%>" disabled="true"
+        required>
       <div class="valid-feedback">
         Looks good!
       </div>
@@ -15,7 +17,7 @@
     <div class="form-group">
       <label class="form-label" for="description">Description</label>
       <textarea class="form-control" type="text" id="description" name="trail[description]" style="height: 10em;"
-        required></textarea>
+        required><%= trail.description %></textarea>
       <div class="valid-feedback">
         Looks good!
       </div>
@@ -37,15 +39,12 @@
 
     <div class="steps">
       <h2 class="mt-5">How to access</h2>
-      <p>To make it easier for others to find and access the trail. Please include a list of short steps. At least one
-        step is required</p>
-
-
+      <p>To make it easier for others to find and access the trail. Please include a list of short steps. At least one step is required</p>
 
     </div>
 
     <button class="btn btn-warning mt-3" id="step">Add Step</button>
-    <button class="btn btn-success mt-3">Add new trail</button>
+    <button class="btn btn-success mt-3">Save And Exit</button>
 
 
   </form>
