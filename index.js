@@ -8,6 +8,8 @@ const ejsMate = require("ejs-mate");
 const trailRouter = require("./routes/trails");
 const commentRouter = require("./routes/comments");
 const authRouter = require("./routes/auth");
+const middleware = require("./middleware");
+
 mongoose.connect("mongodb://127.0.0.1:27017/trailmap", {
   useNewUrlParser: true,
   useUnifiedTopology: true,
@@ -36,6 +38,7 @@ app.use(session({
     maxAge: 1000 * 60 * 60 * 24 * 14
   }
 }));
+app.use(middleware.addUserLocal);
 
 //Routers
 app.use("/trails", trailRouter);

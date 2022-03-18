@@ -1,4 +1,4 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary mb-5">
+<nav class="navbar navbar-expand-lg navbar-dark bg-dark mb-5">
   <div class="container-fluid">
     <a class="navbar-brand" href="#">TrialMap</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup"
@@ -13,8 +13,21 @@
 
 
       </div>
-      <div class="ms-auto">
-        <a class="btn btn-outline-dark" href="/auth">Sign in/up</a>
+      <div class="navbar-nav ms-auto">
+        <% if(currentUser) { %>
+          <a class="nav-item nav-link" href="">
+            <%= currentUser.username %>
+          </a>
+          <a class="nav-item nav-link" href="">
+            <%= currentUser.email %>
+          </a>
+          <a class="btn btn-outline-danger" href="/auth/logout">
+            Sign out
+          </a>
+          <% } else { %>
+            <a class="btn btn-outline-primary" href="/auth/">Sign in/up</a>
+            <% } %>
+
       </div>
     </div>
 

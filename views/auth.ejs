@@ -14,7 +14,7 @@
 
 
 
-          <form id="logon" class="nv" novalidate>
+          <form id="logon" class="nv" novalidate method="POST" action="/auth/login">
             <div>
               <p>Login or <a class="link-success" id="switchSignup">sign up</a></p>
             </div>
@@ -39,7 +39,7 @@
           </form>
 
 
-          <form id="signup" class="nv" style="display: none" novalidate>
+          <form id="signup" class="nv" style="display: none" method="POST" action="auth/signup" novalidate>
             <div>
               <p>Sign up or <a class="link-success" id="switchLogon">log onto your account</a></p>
             </div>
