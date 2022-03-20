@@ -19,7 +19,7 @@ router.post("/login", async (req, res) => {
 
 router.post("/signup", async (req, res) => {
   const user = new User(req.body.auth); 
-  await user.save();
+  await user.runhash();
   req.session.user = user._id;
   res.redirect("/trails");
 });

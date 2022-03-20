@@ -18,14 +18,14 @@ const UserSchema = new mongoose.Schema({
   }
 });
 
-UserSchema.post("save", function (user) {
-  bcrpyt.hash(user.password, 14, function (err, hash) {
-    user.password = hash;
-    user.save();
-  });
-});
 
-UserSchema.methods.authenticate = async function(unhashed) {
+UserSchema.methods.runhash = async function () {
+  const hashed = await bcrpyt.hash(this.password, 12);
+  this.password = hashed;
+  await this.save();
+}
+
+UserSchema.methods.authenticate = async function (unhashed) {
   const result = await bcrpyt.compare(unhashed, this.password);
   return result;
 };
