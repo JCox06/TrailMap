@@ -23,7 +23,7 @@ UserSchema.methods.runhash = async function () {
   const hashed = await bcrpyt.hash(this.password, 12);
   this.password = hashed;
   await this.save();
-}
+};
 
 UserSchema.methods.authenticate = async function (unhashed) {
   const result = await bcrpyt.compare(unhashed, this.password);
@@ -31,4 +31,4 @@ UserSchema.methods.authenticate = async function (unhashed) {
 };
 
 const User = mongoose.model("User", UserSchema);
-module.exports = User;
+module.exports = User; 

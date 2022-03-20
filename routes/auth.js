@@ -14,6 +14,7 @@ router.post("/login", async (req, res) => {
   if (result) {
     req.session.user = user._id;
   }
+  req.flash("message", "Welcome back to TrailMap");
   res.redirect("/trails");
 });
 
@@ -21,11 +22,13 @@ router.post("/signup", async (req, res) => {
   const user = new User(req.body.auth); 
   await user.runhash();
   req.session.user = user._id;
+  req.flash("message", "Thanks for creating your account. You can now participate in the community!");
   res.redirect("/trails");
 });
 
 router.get("/logout", (req, res) => {
   req.session.user = null;
+  req.flash("message", "You have successfully signed out");
   res.redirect("/auth");
 });
 

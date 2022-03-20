@@ -14,9 +14,13 @@
       <div class="card">
         <div class="card-header">About</div>
         <div class="card-body">
-          <p class="card-text">Trail suggested by: </p>
-          <p class="card-text">Total user ratings: </p>
-          <p class="card-text">Average user score: </p>
+          <p class="card-text">Trail suggested by: <a class="link-success">
+              <%= trail.author.username%>
+            </a> </p>
+          <p class="card-text">Total user ratings: <%= trail.comments.length %>
+          </p>
+          <p class="card-text">Average user score: <%= trail.avgScore() %>
+          </p>
 
         </div>
         <div class="card-footer">
@@ -26,11 +30,13 @@
         </div>
       </div>
 
+      <% if(currentUser && trail.isAuthor(currentUser)) {%>
+        <form class="mt-3" method="POST" action="/trails/<%= trail._id %>?_method=DELETE">
+          <a class="btn btn-warning" href="/trails/<%=trail._id%>/edit">Edit Trail</a>
+          <button class="btn btn-danger">Delete Trail</button>
+        </form>
+        <% } %>
 
-      <form class="mt-3" method="POST" action="/trails/<%= trail._id %>?_method=DELETE">
-        <a class="btn btn-warning" href="/trails/<%=trail._id%>/edit">Edit Trail</a>
-        <button class="btn btn-danger">Delete Trail</button>
-      </form>
 
     </div>
     <div class="col-6">
@@ -114,7 +120,12 @@
 
         </div>
 
-        <button class="btn btn-success mt-3">Submit Review</button>
+        <% if(currentUser && trail.isAuthor(currentUser)) { %>
+          <button class="btn btn-success mt-3">Submit Review</button>
+          <% } else {%>
+            <p><a class="link-success" href="/auth">Sign up</a> to participate in the community</p>
+            <% } %>
+
       </form>
     </div>
 

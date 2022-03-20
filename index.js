@@ -9,6 +9,7 @@ const trailRouter = require("./routes/trails");
 const commentRouter = require("./routes/comments");
 const authRouter = require("./routes/auth");
 const middleware = require("./middleware");
+const flash = require("express-flash");
 
 mongoose.connect("mongodb://127.0.0.1:27017/trailmap", {
   useNewUrlParser: true,
@@ -38,7 +39,9 @@ app.use(session({
     maxAge: 1000 * 60 * 60 * 24 * 14
   }
 }));
+app.use(flash());
 app.use(middleware.addUserLocal);
+app.use(middleware.addFlashMessages);
 
 //Routers
 app.use("/trails", trailRouter);

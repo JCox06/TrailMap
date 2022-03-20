@@ -19,8 +19,26 @@
   <%- include("../partials/nav") %>
 
     <main class="container">
-      <%- body %>
-        <div class="m-5"></div>
+
+      <% if(message && message.length> 0) { %>
+        <div class="alert alert-info" role="alert">
+          <p>
+            <%=message %>
+          </p>
+
+        </div>
+        <% } %>
+
+          <% if(error && error.length> 0) { %>
+            <div class="alert alert-warning" role="alert">
+              <p>
+                <%= error%>
+              </p>
+            </div>
+            <% } %>
+
+              <%- body %>
+                <div class="m-5"></div>
     </main>
 
 
