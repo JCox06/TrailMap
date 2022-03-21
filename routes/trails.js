@@ -16,10 +16,11 @@ router.get("/new", middleware.isLoggedIn, middleware.validateTrailAuthor, (req, 
 router.get("/:Tid", async (req, res) => {
   const { Tid } = req.params;
   const trail = await Trail.findById(Tid)
-    .populate("comments")
+    .populate({
+      path: "comments",
+      populate: { path: "author" }
+    })
     .populate("author");
-
-  console.log(trail);
   res.render("trails/show", { trail });
 });
 

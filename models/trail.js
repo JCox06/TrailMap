@@ -43,8 +43,17 @@ TrailSchema.methods.isAuthor = function (user) {
   }
 };
 
+
 TrailSchema.methods.avgScore = function () {
-  return 1;
+  const ratings = this.comments;
+  let average = 0;
+  for (r of ratings) {
+    average = average + r.rating;
+  }
+  console.log(average);
+  average = average / ratings.length;
+  console.log(average)
+  return Math.round(average);
 }
 
 const Trail = mongoose.model("Trail", TrailSchema);

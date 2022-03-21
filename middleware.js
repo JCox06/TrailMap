@@ -34,7 +34,7 @@ async function validateTrailAuthor(req, res, next) {
   }
 
   req.flash("error", "User validation error");
-  res.redirect(`/campgrounds/${Tid}`);
+  res.redirect(`/trails/${Tid}`);
 }
 
 function addFlashMessages(req, res, next) {

@@ -10,12 +10,20 @@ router.get("/", (req, res) => {
 router.post("/login", async (req, res) => {
   const { email, password } = req.body.auth;
   const user = await User.findOne({ email });
+  if (! user) {
+    req.flash("error", "User name or password is incorrect. Please try again");
+    res.redirect("/auth");
+    return;
+  }
   const result = await user.authenticate(password);
   if (result) {
     req.session.user = user._id;
+    req.flash("message", "Welcome back to TrailMap");
+    res.redirect("/trails");  
+  } else {
+    req.flash("error", "User name or password is incorrect. Please try again");
+    res.redirect("/auth");
   }
-  req.flash("message", "Welcome back to TrailMap");
-  res.redirect("/trails");
 });
 
 router.post("/signup", async (req, res) => {

@@ -6,29 +6,18 @@
   </h1>
 
 
+
   <div class="row mt-3">
 
     <div class="col-6">
 
-
-      <div class="card">
-        <div class="card-header">About</div>
-        <div class="card-body">
-          <p class="card-text">Trail suggested by: <a class="link-success">
-              <%= trail.author.username%>
-            </a> </p>
-          <p class="card-text">Total user ratings: <%= trail.comments.length %>
-          </p>
-          <p class="card-text">Average user score: <%= trail.avgScore() %>
-          </p>
-
-        </div>
-        <div class="card-footer">
-          <small class="text-muted">Last updated on the </small>
-          <br>
-          <small class="text-muted">First posted on the </small>
-        </div>
-      </div>
+      <p class="starability-result" data-rating="<%= trail.avgScore() %>">
+        Rated: 3 stars
+      </p>
+      <p>Posted by <%= trail.author.username %>
+      </p>
+      <p> <%= trail.comments.length %> total comments</p>
+      
 
       <% if(currentUser && trail.isAuthor(currentUser)) {%>
         <form class="mt-3" method="POST" action="/trails/<%= trail._id %>?_method=DELETE">
@@ -47,7 +36,8 @@
               src="https://cdn.bootstrapstudio.io/placeholders/1400x800.png" alt="Slide Image"></div>
 
           <% for(i in trail.imagePreviews) { %>
-            <div class="carousel-item active"><img class="w-100 d-block" src="<%= i.source %>" alt="Slide Image"></div>
+            <div class="carousel-item active"><img class="w-100 d-block" src="<%= i.source %>" alt="Slide Image">
+            </div>
             <% } %>
         </div>
         <div><a class="carousel-control-prev" href="#carousel-1" role="button" data-bs-slide="prev"><span
@@ -105,10 +95,25 @@
       <form action="/trails/<%= trail._id %>/comment " method="POST" class="nv" novalidate>
         <div class="form-group">
           <label for="rating" class="form-label">Trail Rating</label>
-          <input type="number" class="form-control" id="rating" name="comment[rating]" required>
-          <div class="valid-feedback">
-            Looks good!
+
+          <div>
+            <fieldset class="starability-basic">
+              <input type="radio" id="no-rate" class="input-no-rate" name="comment[rating]" value="0" checked
+                aria-label="No rating." />
+              <input type="radio" id="first-rate1" name="comment[rating]" value="1" />
+              <label for="first-rate1" title="Terrible">1 star</label>
+              <input type="radio" id="first-rate2" name="comment[rating]" value="2" />
+              <label for="first-rate2" title="Not good">2 stars</label>
+              <input type="radio" id="first-rate3" name="comment[rating]" value="3" />
+              <label for="first-rate3" title="Average">3 stars</label>
+              <input type="radio" id="first-rate4" name="comment[rating]" value="4" />
+              <label for="first-rate4" title="Very good">4 stars</label>
+              <input type="radio" id="first-rate5" name="comment[rating]" value="5" />
+              <label for="first-rate5" title="Amazing">5 stars</label>
+            </fieldset>
           </div>
+
+
         </div>
 
         <div class="form-group">
@@ -120,7 +125,7 @@
 
         </div>
 
-        <% if(currentUser && trail.isAuthor(currentUser)) { %>
+        <% if(currentUser) { %>
           <button class="btn btn-success mt-3">Submit Review</button>
           <% } else {%>
             <p><a class="link-success" href="/auth">Sign up</a> to participate in the community</p>
@@ -141,18 +146,25 @@
         <% } else { %>
           <% for(let c of trail.comments) { %>
             <div class="card mb-3">
-              <div class="card-header">
-                <%= c.rating %> rating by abcdefg
-              </div>
               <div class="card-body">
+
+                <p class="starability-result" data-rating="<%=c.rating%>">
+                  Rated <%=c.rating%> stars
+                </p>
 
                 <p card="card-text">
                   <%= c.text %>
                 </p>
 
               </div>
+
+
+
+
               <div class="card-footer">
-                <small class="text-muted">Posted on the </small>
+                <small class="text-muted">By <a href="#">
+                    <%= c.author.username %>
+                  </a></small>
               </div>
             </div>
             <% } %>
