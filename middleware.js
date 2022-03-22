@@ -23,7 +23,7 @@ async function addUserLocal(req, res, next) {
 }
 
 async function validateTrailAuthor(req, res, next) {
-  const currentUser = req.session.user;
+  const currentUser = await User.findById(req.session.user);
   const { Tid } = req.params;
 
   const trail = await Trail.findById(Tid);
