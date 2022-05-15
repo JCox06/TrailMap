@@ -7,26 +7,26 @@
     </button>
     <div class="collapse navbar-collapse" id="navbarNavAltMarkup">
       <div class="navbar-nav">
-        <a class="nav-item nav-link" href="#">Home</a>
+        <a class="nav-item nav-link" href="/">Home</a>
         <a class="nav-item nav-link" href="/trails">Trails</a>
         <a class="nav-item nav-link" href="/trails/new">Add New Trail</a>
 
 
       </div>
       <div class="navbar-nav ms-auto">
-        <% if(currentUser) { %>
-          <a class="nav-item nav-link" href="">
-            <%= currentUser.username %>
-          </a>
-          <a class="nav-item nav-link" href="">
-            <%= currentUser.email %>
-          </a>
-          <a class="btn btn-outline-danger" href="/auth/logout">
-            Sign out
-          </a>
-          <% } else { %>
-            <a class="btn btn-outline-primary" href="/auth/">Sign in/up</a>
-            <% } %>
+          <% if(currentUser) { %>
+            <a class="nav-item nav-link" href="">
+              <%= currentUser.username %>
+            </a>
+            <a class="nav-item nav-link" href="">
+              <%= currentUser.email %>
+            </a>
+            <a class="btn btn-outline-danger" href="/auth/logout">
+              Sign out
+            </a>
+            <% } else { %>
+              <a class="btn btn-outline-primary" href="/auth/login">Sign in/up</a>
+              <% } %>
 
       </div>
     </div>

@@ -35,13 +35,13 @@ const TrailSchema = new mongoose.Schema({
   }
 });
 
-TrailSchema.methods.isAuthor = function (user) {
-  if (this.author._id.equals(user._id)) {
-    return true;
-  } else {
-    return false;
-  }
-};
+// TrailSchema.methods.isAuthor = function (user) {
+//   if (this.author._id.equals(user._id)) {
+//     return true;
+//   } else {
+//     return false;
+//   }
+// };
 
 
 TrailSchema.methods.avgScore = function () {
@@ -55,6 +55,10 @@ TrailSchema.methods.avgScore = function () {
   console.log(average)
   return Math.round(average);
 }
+
+TrailSchema.methods.isAuthor = function (user) {
+  return this.author.equals(user._id);
+};
 
 const Trail = mongoose.model("Trail", TrailSchema);
 module.exports = Trail;

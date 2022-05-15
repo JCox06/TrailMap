@@ -1,0 +1,46 @@
+<% layout("layouts/default") %>
+
+
+
+
+<div class="row">
+  <div class="col-12 offset-4 mt-5">
+    <div class="card" style="width: 30%">
+      <div class="card-header">Authentication card
+      </div>
+
+
+
+      <!-- Sign In -->
+      <div class="card-body">
+
+        <form id="logon" class="nv" novalidate method="POST" action="/auth/login">
+          <div>
+            <p>Login or <a class="link-success" href="/auth/signup">sign up</a></p>
+          </div>
+
+          <div class="form-group">
+            <label for="username" class="form-label">Username</label>
+            <input type="text" id="username" name="username" class="form-control" required>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="password" class="form-label">Password</label>
+            <input type="password" id="password" name="password" class="form-control" required>
+            <div class="valid-feedback">
+              Looks good!
+            </div>
+          </div>
+
+          <button class="btn btn-primary mt-3 col-12">Logon</button>
+        </form>
+
+      </div>
+    </div>
+
+  </div>
+
+</div>

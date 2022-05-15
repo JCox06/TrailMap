@@ -9,7 +9,7 @@ router.get("/", async (req, res) => {
   res.render("trails/trails", { trails });
 });
 
-router.get("/new", middleware.isLoggedIn, middleware.validateTrailAuthor, (req, res) => {
+router.get("/new", middleware.isLoggedIn, (req, res) => {
   res.render("trails/new");
 });
 
@@ -36,10 +36,10 @@ router.get("/:Tid/edit", middleware.isLoggedIn, middleware.validateTrailAuthor, 
   res.render("trails/edit", { trail });
 });
 
-router.post("/", middleware.isLoggedIn, middleware.validateTrailAuthor, async (req, res) => {
+router.post("/", middleware.isLoggedIn, async (req, res) => {
   const { title, description, difficulty} = req.body.trail;
   const steps = req.body.trail.step;
-  const author = await User.findById(req.session.user);
+  const author = req.user;
   
   const trail = new Trail({ title, description, difficulty, author });
   

@@ -2,39 +2,39 @@ const User = require("./models/user");
 const Trail = require("./models/trail");
 
 function isLoggedIn(req, res, next) {
-  const user = req.session.user;
-  if (user) {
+  if (req.isAuthenticated()) {
+    
     next();
   } else {
-    req.flash("error", "You need to be logged in to complete this action");
-    res.redirect("/auth");
+    req.flash("error", "You must be logged in to complete that action");
+    res.redirect("/auth/login");
   }
 }
 
-async function addUserLocal(req, res, next) {
-  const user = await User.findById(req.session.user);
-  if (user) {
-    res.locals.currentUser = user;
-  } else {
+function addUserLocal(req, res, next) {
+  const user = req.user;
+  
+  if (!user) {
     res.locals.currentUser = null;
-
+  } else {
+    res.locals.currentUser = user;
   }
   next();
 }
 
 async function validateTrailAuthor(req, res, next) {
-  const currentUser = await User.findById(req.session.user);
+  const currentUser = req.user;
   const { Tid } = req.params;
+
 
   const trail = await Trail.findById(Tid);
 
-  if (trail.isAuthor(currentUser)) {
+  if (trail.author.equals(currentUser._id)) {
     next();
-    return;
+  } else {
+    req.flash("error", "You do not have the required permissions to complete that action");
+    res.redirect(`/trails/${Tid}`);
   }
-
-  req.flash("error", "User validation error");
-  res.redirect(`/trails/${Tid}`);
 }
 
 function addFlashMessages(req, res, next) {
